@@ -86,14 +86,18 @@ print(f"Length of airman's catch phrase: {len(airman)}")
 print(f"Length of earthman's catch phrase: {len(earthman)}")
 
 
-class Villain(AirHero, EarthHero):
+class Villain(AirHero):
     people = 'monster'
 
     def gen_x(self):
         pass
 
-    def crit(self):
-        self.damage = self.damage**2
+    def crit(self, other):
+        other.health_points -= self.damage**2
+        return f'the {self.nickname} has caused {self.damage**2}-damage to the {other.nickname}'
 
 
-sindrome = Villain('Vlad', 'DarkLord', 'shadow strike', 15, 'darkness is power', damage=10, fly=False)
+sindrome = Villain('Vlad', 'DarkLord', 'shadow strike', 15, 'darkness is power',
+                   damage=24, fly=False)
+
+print(sindrome.crit(freon))
